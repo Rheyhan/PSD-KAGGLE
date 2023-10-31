@@ -1,0 +1,34 @@
+```{r}
+library(readxl)
+library(car)
+library(lmtest)
+library(MASS)
+
+train <- read_xlsx("D:/Kuliah/Semester 5/PSD/psd-challenge/Train.xlsx")
+```
+# Model Regresi Polinomial
+```{r}
+model <- lm(UHH ~ poly(PSTV04, 2) + poly(PSTV05, 1) + poly(PSTV06, 2) + poly(PSTV07, 2) + poly(PSTV08, 4) + poly(PSTV09, 18) + poly(PSTV10, 18) + poly(PSTV11, 8) + poly(PSTV12, 2) + poly(PSTV13, 17) + poly(PSTV14, 18), data = train)
+
+f <- summary(model)
+
+# rsquare
+f$r.squared
+```
+
+# Nyimpen Data dan Forecast
+```{r}
+library(dplyr)
+new_data <- read_excel("D:/Kuliah/Semester 5/PSD/psd-challenge/Test.xlsx")
+new_data
+#yg biasa
+UHH<- predict(model, newdata = new_data)
+UHH
+databaru <- as.data.frame(UHH)
+databaru
+```
+```{r}
+# Simpan data frame yang telah diubah kembali ke file CSV yang sama
+write.csv(databaru,"percobaan2.csv", row.names = FALSE, quote = FALSE)
+```
+
