@@ -16,19 +16,15 @@ f <- summary(model)
 f$r.squared
 ```
 
-# Nyimpen Data dan Forecast
+# Predict and save
 ```{r}
 library(dplyr)
 new_data <- read_excel("D:/Kuliah/Semester 5/PSD/psd-challenge/Test.xlsx")
-new_data
-#yg biasa
+
 UHH<- predict(model, newdata = new_data)
-UHH
 databaru <- as.data.frame(UHH)
-databaru
 ```
 ```{r}
-# Simpan data frame yang telah diubah kembali ke file CSV yang sama
 write.csv(databaru,"percobaan2.csv", row.names = FALSE, quote = FALSE)
 ```
 
